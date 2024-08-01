@@ -1,0 +1,22 @@
+clc,clear;
+A = [0  10  0  0  0  0;
+     10  0  5  0  0  0;
+     0  5  0  7  0  0;
+     0  0  7  0  2  8;
+     0  0  0  2  0  3;
+     0  0  0  8  3  0];
+% 创建图对象
+G = graph(A);%这是一个无向图，里面存着无向图的点和路径
+% 找到从节点 1 到节点 6 的最短路径
+[startNode, endNode] = deal(1, 5);
+[path, d] = shortestpath(G, startNode, endNode);
+% 显示结果
+fprintf('The shortest path from node %d to node %d is:\n', startNode, endNode);
+disp(path);
+fprintf('The distance is: %f\n', d);
+% 绘制图并突出显示最短路径
+figure;
+p=plot(G, 'EdgeLabel', G.Edges.Weight);
+%下面的p存的是画好的图
+highlight(p,path,'EdgeColor', 'r', 'LineWidth', 2);
+title('Graph with Shortest Path Highlighted');
